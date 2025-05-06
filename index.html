@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bounded Buffer Simulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Input Panel -->
+        <div class="panel input-panel">
+            <h2>Process Configuration</h2>
+            
+            <div class="input-group">
+                <label for="process-queue">Process Queue (p1,p2,c1,...)</label>
+                <input 
+                    type="text" 
+                    id="process-queue" 
+                    value="p1,p2,c1,p3,c2"
+                    placeholder="p1,p2,c1,p3,c2">
+            </div>
+            
+            <div class="input-group">
+                <label for="buffer-size">Buffer Size</label>
+                <input 
+                    type="number" 
+                    id="buffer-size" 
+                    value="3" 
+                    min="1" 
+                    max="10">
+            </div>
+            
+            <div class="input-group">
+                <label for="speed">Animation Speed: <span id="speed-value">1000ms</span></label>
+                <input 
+                    type="range" 
+                    id="speed" 
+                    min="200" 
+                    max="2000" 
+                    step="100" 
+                    value="1000">
+            </div>
+            
+            <div class="button-group">
+                <button id="start-btn" class="btn btn-start">Start</button>
+                <button id="pause-btn" class="btn btn-pause" disabled>Pause</button>
+                <button id="reset-btn" class="btn btn-reset">Reset</button>
+            </div>
+            
+            <div class="help-text">
+                <h3>Format Help:</h3>
+                <p><code>p1, p2, ...</code> - Producer processes</p>
+                <p><code>c1, c2, ...</code> - Consumer processes</p>
+                <p>Example: <code>p1,p2,c1,p3,c2</code></p>
+            </div>
+        </div>
+
+        <!-- Visualization Panel -->
+        <div class="panel visualization-panel">
+            <h2>Buffer Visualization</h2>
+            
+            <div class="buffer-container">
+                <div class="buffer-info">
+                    <div class="counter empty">
+                        <span>Empty: </span>
+                        <span id="empty-count">3</span>
+                    </div>
+                    <div class="counter full">
+                        <span>Full: </span>
+                        <span id="full-count">0</span>
+                    </div>
+                </div>
+
+                <div id="buffer" class="buffer"></div>
+                
+                <div id="active-processes" class="active-processes"></div>
+            </div>
+            
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color producer"></div>
+                    <span>Producer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color consumer"></div>
+                    <span>Consumer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color waiting"></div>
+                    <span>Waiting</span>
+                </div>
+            </div>
+            
+            <div class="step-counter">
+                <div id="step-display">Ready</div>
+            </div>
+            
+            <div class="status-bar">
+                <p id="current-status">Ready to start simulation</p>
+            </div>
+        </div>
+
+        <!-- Log Panel -->
+        <div class="panel log-panel">
+            <h2>Process Log</h2>
+            
+            <div id="log-container" class="log-container">
+                <div class="placeholder-text">Logs will appear here when simulation starts...</div>
+            </div>
+            
+            <div class="log-legend">
+                <h3>Log Legend:</h3>
+                <div class="legend-grid">
+                    <div class="legend-item">
+                        <div class="log-color mutex"></div>
+                        <span>Mutex</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="log-color producer"></div>
+                        <span>Producer</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="log-color consumer"></div>
+                        <span>Consumer</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="log-color waiting"></div>
+                        <span>Waiting</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="simulation.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
